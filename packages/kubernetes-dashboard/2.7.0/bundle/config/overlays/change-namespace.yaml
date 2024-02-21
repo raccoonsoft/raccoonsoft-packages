@@ -1,0 +1,23 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
+
+#@overlay/match by=overlay.subset({"kind":"Namespace", "metadata": {"name": "kubernetes-dashboard"}})
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: #@ data.values.namespace
+
+#@overlay/match by=overlay.subset({"metadata": {"namespace": "kubernetes-dashboard"}}), expects=11
+---
+metadata:
+  namespace: #@ data.values.namespace
+
+#@ crb=overlay.subset({"kind":"ClusterRoleBinding"})
+#@ rb=overlay.subset({"kind":"RoleBinding"})
+#@overlay/match by=overlay.or_op(crb, rb), expects=2
+---
+subjects:
+#@overlay/match by=overlay.subset({"namespace": "kubernetes-dashboard"})
+- kind: ServiceAccount
+  namespace: #@ data.values.namespace

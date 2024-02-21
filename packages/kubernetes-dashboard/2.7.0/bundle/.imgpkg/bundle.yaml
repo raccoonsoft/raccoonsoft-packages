@@ -1,0 +1,10 @@
+apiVersion: imgpkg.carvel.dev/v1alpha1
+kind: Bundle
+metadata:
+  name: kubernetes-dashboard
+authors:
+  - name: Ulrich Hoelscher
+    email: uhoelsccher@raccoonsoft.com
+websites:
+  - url: github.com/kubernetes/dashboard
+  - url: github.com/raccoonsoft/raccoonsoft-packages
