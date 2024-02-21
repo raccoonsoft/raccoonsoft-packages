@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+minimumRequiredVersion: 0.12.0
+directories:
+- contents:
+  - git:
+      url: https://github.com/kubernetes/dashboard
+      ref: v2.7.0
+    includePaths:
+    - aio/deploy/recommended.yaml
+    newRootPath: aio
+    path: .
+  path: config/upstream

@@ -1,0 +1,11 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - git:
+      commitTitle: Bump k8s modules to 0.25.0 and prepare for 2.7.0 release (#7316)...
+      sha: 42deb6b32a27296ac47d1f9839a68fab6053e5fc
+      tags:
+      - v2.7.0
+    path: .
+  path: config/upstream
+kind: LockConfig
