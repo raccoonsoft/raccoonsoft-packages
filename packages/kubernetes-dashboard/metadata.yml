@@ -1,7 +1,7 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: PackageMetadata
 metadata:
-  name: kubernetes-dashboard.raccoonsoft.com
+  name: kubernetes-dashboard.packages.raccoonsoft.com
 spec:
   displayName: "Kubernetes Dashboard"
   longDescription: "Kubernetes Dashboard is a general purpose, web-based UI for Kubernetes clusters. It allows users to manage applications running in the cluster and troubleshoot them, as well as manage the cluster itself. For more got to https://github.com/kubernetes/dashboard"

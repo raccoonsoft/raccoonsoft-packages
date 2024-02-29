@@ -1,0 +1,31 @@
+#@ load("@ytt:data", "data")  # for reading data values (generated via ytt's data-values-schema-inspect mode).
+#@ load("@ytt:yaml", "yaml")  # for dynamically decoding the output of ytt's data-values-schema-inspect
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: #@ "kubernetes-dashboard.packages.raccoonsoft.com." + data.values.version
+spec:
+  refName: kubernetes-dashboard.packages.raccoonsoft.com
+  version: #@ data.values.version
+  releaseNotes: kubernetes dashboard 2.7.0 https://github.com/kubernetes/dashboard/releases/tag/v2.7.0
+  licenses:
+  - Apache 2.0
+  valuesSchema:
+    openAPIv3: #@ yaml.decode(data.values.openapi)["components"]["schemas"]["dataValues"]
+  capacityRequirementsDescription: Varies significantly based on number of Services, Deployments, and Pods in the cluster.
+  template:
+    spec:
+      fetch:
+      - imgpkgBundle:
+          image: #@ "${REPO_HOST}/raccoonsoft/packages/kubernetes-dashboard:" + data.values.version
+      template:
+      - ytt:
+          paths:
+          - "config/"
+      - kbld:
+          paths:
+          - ".imgpkg/images.yml"
+          - "-"
+      deploy:
+      - kapp: {}

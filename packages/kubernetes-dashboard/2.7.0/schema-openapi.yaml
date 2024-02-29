@@ -13,4 +13,4 @@ components:
         namespace:
           type: string
           description: The namespace in which to deploy the Kubernetes Dashboard.
-          default: kubernetes-dashboardy
+          default: kubernetes-dashboard
