@@ -1,0 +1,11 @@
+---
+apiVersion: imgpkg.carvel.dev/v1alpha1
+images:
+- annotations:
+    kbld.carvel.dev/id: ghcr.io/raccoonsoft/packages/kubernetes-dashboard:2.7.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 2.7.0
+          url: ghcr.io/raccoonsoft/packages/kubernetes-dashboard:2.7.0
+  image: ghcr.io/raccoonsoft/packages/kubernetes-dashboard@sha256:5a44bb07d50bea39b77cb1e431cf69aa120c3aa27f985ec9846ffb5093e85b62
+kind: ImagesLock

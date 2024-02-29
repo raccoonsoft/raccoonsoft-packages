@@ -1,0 +1,38 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: kubernetes-dashboard.packages.raccoonsoft.com.2.7.0
+  creationTimestamp: null
+spec:
+  refName: kubernetes-dashboard.packages.raccoonsoft.com
+  releasedAt: "2024-02-24T11:19:10Z"
+  version: 2.7.0
+  releaseNotes: kubernetes dashboard 2.7.0 https://github.com/kubernetes/dashboard/releases/tag/v2.7.0
+  licenses:
+  - Apache 2.0
+  valuesSchema:
+    openAPIv3:
+      type: object
+      additionalProperties: false
+      description: OpenAPIv3 Schema for Kubernetes Dashboard 2.7.0
+      properties:
+        namespace:
+          type: string
+          description: The namespace in which to deploy the Kubernetes Dashboard.
+          default: kubernetes-dashboard
+  capacityRequirementsDescription: Varies significantly based on number of Services, Deployments, and Pods in the cluster.
+  template:
+    spec:
+      fetch:
+      - imgpkgBundle:
+          image: ghcr.io/raccoonsoft/packages/kubernetes-dashboard@sha256:5a44bb07d50bea39b77cb1e431cf69aa120c3aa27f985ec9846ffb5093e85b62
+      template:
+      - ytt:
+          paths:
+          - config
+      - kbld:
+          paths:
+          - .imgpkg/images.yml
+          - '-'
+      deploy:
+      - kapp: {}
