@@ -1,0 +1,11 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - git:
+      commitTitle: Update app version in chart to alpha
+      sha: c07a728966a621cf31b38ea43335f26ee3fc99be
+      tags:
+      - v3.0.0-alpha0
+    path: .
+  path: config/upstream
+kind: LockConfig

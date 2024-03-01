@@ -1,0 +1,6 @@
+#@data/values-schema
+#@schema/desc "OpenAPIv3 Schema for kubernetes-dashboard"
+---
+
+#@schema/desc "The namespace in which to deploy the kubernetes-dashboard"
+namespace: kubernetes-dashboard
