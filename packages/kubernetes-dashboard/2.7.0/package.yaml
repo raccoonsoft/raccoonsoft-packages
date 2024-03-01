@@ -4,7 +4,7 @@ metadata:
   name: kubernetes-dashboard.packages.raccoonsoft.com.2.7.0
 spec:
   refName: kubernetes-dashboard.packages.raccoonsoft.com
-  version: 2.7.0
+  version: 2.7.0+raccoonsoft.com
   releaseNotes: kubernetes dashboard 2.7.0 https://github.com/kubernetes/dashboard/releases/tag/v2.7.0
   releasedAt: "2024-02-24T11:19:10Z"
   licenses:
