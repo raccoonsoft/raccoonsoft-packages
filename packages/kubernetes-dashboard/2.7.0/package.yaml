@@ -1,7 +1,7 @@
 apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
-  name: kubernetes-dashboard.packages.raccoonsoft.com.2.7.0
+  name: kubernetes-dashboard.packages.raccoonsoft.com.2.7.0+raccoonsoft.com
 spec:
   refName: kubernetes-dashboard.packages.raccoonsoft.com
   version: 2.7.0+raccoonsoft.com
