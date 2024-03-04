@@ -1,0 +1,60 @@
+#@ load("@ytt:overlay", "overlay")
+#@overlay/match by=overlay.and_op(overlay.subset({"kind": "Deployment"}), overlay.subset({"metadata": {"name": "kubernetes-dashboard-api"}}))
+---
+spec:
+  template:
+    spec:
+      securityContext:
+        #@overlay/match missing_ok=True
+        runAsNonRoot: true
+      containers:
+      #@overlay/match by=overlay.all
+      -
+        #@overlay/match missing_ok=True
+        securityContext:
+          #@overlay/match missing_ok=True
+          runAsNonRoot: true
+          #@overlay/match missing_ok=True
+          capabilities:
+            drop:
+            - ALL
+---
+#@overlay/match by=overlay.and_op(overlay.subset({"kind": "Deployment"}), overlay.subset({"metadata": {"name": "kubernetes-dashboard-web"}}))
+---
+spec:
+  template:
+    spec:
+      securityContext:
+        #@overlay/match missing_ok=True
+        runAsNonRoot: true
+      containers:
+      #@overlay/match by=overlay.all
+      -
+        #@overlay/match missing_ok=True
+        securityContext:
+          #@overlay/match missing_ok=True
+          runAsNonRoot: true
+          #@overlay/match missing_ok=True
+          capabilities:
+            drop:
+            - ALL
+---
+#@overlay/match by=overlay.and_op(overlay.subset({"kind": "Deployment"}), overlay.subset({"metadata": {"name": "kubernetes-dashboard-metrics-scraper"}}))
+---
+spec:
+  template:
+    spec:
+      securityContext:
+        #@overlay/match missing_ok=True
+        runAsNonRoot: true
+      containers:
+      #@overlay/match by=overlay.all
+      -
+        #@overlay/match missing_ok=True
+        securityContext:
+          #@overlay/match missing_ok=True
+          runAsNonRoot: true
+          #@overlay/match missing_ok=True
+          capabilities:
+            drop:
+            - ALL
