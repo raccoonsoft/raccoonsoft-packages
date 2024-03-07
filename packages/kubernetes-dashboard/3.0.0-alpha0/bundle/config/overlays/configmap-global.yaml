@@ -1,0 +1,16 @@
+#@ load("@ytt:overlay", "overlay")
+#@ load("@ytt:data", "data")
+#@ load("@ytt:json", "json")
+
+#@overlay/match by=overlay.subset({"kind": "ConfigMap", "metadata": {"name": "kubernetes-dashboard-settings"}})
+---
+#@ if data.values.settings.globalSettings or data.values.settings.pinnedCRDs:
+#@overlay/match missing_ok=True
+data:
+  #@ if data.values.settings.globalSettings:
+  _global: #@ json.encode(data.values.settings.globalSettings)
+  #@ end
+  #@ if data.values.settings.pinnedCRDs:
+  _pinnedCRD: #@json.encode(data.values.settings.pinnedCRDs)
+  #@ end
+#@ end

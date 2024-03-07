@@ -1,6 +1,52 @@
 #@data/values-schema
-#@schema/desc "OpenAPIv3 Schema for kubernetes-dashboard"
+#@schema/desc "OpenAPIv3 Schema for kubernetes-dashboard 3.0.0-alpha0"
 ---
 
 #@schema/desc "The namespace in which to deploy the kubernetes-dashboard"
 namespace: kubernetes-dashboard
+
+#@schema/desc "The ingress settings for the kubernetes-dashboard"
+ingress:
+  #@schema/desc "The ingress controller to use [contour, nginx]"
+  #@schema/validation/enum ["contour", "nginx"]
+  ingressController: contour
+  #@schema/desc "Cert-manager issuer to use for the ingress"
+  #@schema/nullable
+  certManagerIssuer: "selfsigned"
+  #@schema/desc "Host to use for the ingress"
+  #@schema/nullable
+  host: "localhost"
+
+#@schema/desc "The global settings for kubernetes-dashboard, Note: Use all or none. Dashboard does not support default value merging currently."
+settings:
+  #@schema/desc "The global settings for kubernetes-dashboard, Note: Use all or none. Dashboard does not support default value merging currently."
+  #@schema/nullable
+  globalSettings:
+    #@schema/desc "Cluster name that appears in the browser window title if it is set"
+    clusterName: ""
+    #@schema/descMax "Number of items that can be displayed on each list page"
+    #@schema/validation/minimum 1
+    itemsPerPage: 10
+    #@schema/desc "Number of seconds between every auto-refresh of logs"
+    #@schema/validation/minimum 1
+    logsAutoRefreshTimeInterval: 5
+    #@schema/desc "Number of seconds between every auto-refresh of every resource. Set 0 to disable"
+    #@schema/validation/minimum 1
+    resourceAutoRefreshTimeInterval: 5
+    #@schema/desc "Hide all access denied warnings in the notification panel"
+    disableAccessDeniedNotifications: false
+
+  #@schema/desc "Pinned CRDs that will be displayed in dashboard's menu"
+  #@schema/nullable
+  pinnedCRDs: 
+    - kind: ""
+      name: ""
+      displayName: ""
+      namespaced: true
+    #! - kind: customresourcedefinition
+    #!  #  Fully qualified name of a CRD
+    #!  name: prometheus.monitoring.coreos.com
+    #!  #  Display name
+    #!  displayName: Prometheus
+    #!  #  Is this CRD namespaced?
+    #!  namespaced: true
