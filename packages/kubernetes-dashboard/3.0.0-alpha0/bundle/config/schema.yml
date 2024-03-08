@@ -6,6 +6,7 @@
 namespace: kubernetes-dashboard
 
 #@schema/desc "The ingress settings for the kubernetes-dashboard"
+#@schema/validation not_null=True
 ingress:
   #@schema/desc "The ingress controller to use [contour, nginx]"
   #@schema/validation/enum ["contour", "nginx"]

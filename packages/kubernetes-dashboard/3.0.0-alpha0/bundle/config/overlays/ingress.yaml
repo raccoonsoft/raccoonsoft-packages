@@ -1,0 +1,36 @@
+#@ load("@ytt:overlay", "overlay")
+#@ load("@ytt:data", "data")
+
+#@overlay/match by=overlay.subset({"kind": "Ingress", "metadata": {"name": "kubernetes-dashboard"}})
+---
+metadata:
+  labels:
+    #@ if data.values.ingress.ingressController == "contour":
+    #@overlay/replace
+    app.kubernetes.io/name: contour-ingress
+    #@ end
+  #@ if data.values.ingress.ingressController == "contour":
+  #@overlay/replace or_add=True, via=lambda left, right: {"ingress.kubernetes.io/force-ssl-redirect": left["nginx.ingress.kubernetes.io/ssl-redirect"]}
+  #@ end
+  annotations:
+spec:
+  #@overlay/replace
+  ingressClassName: #@ data.values.ingress.ingressController
+  tls:
+    #@overlay/match by=overlay.all
+    - hosts:
+      #@overlay/match by=overlay.subset("localhost")
+      - #@ data.values.ingress.host
+  rules:
+  #@overlay/match by=overlay.index(0)
+  - host: #@ data.values.ingress.host
+     
+---
+#@overlay/match by=overlay.subset({"kind": "Ingress", "metadata": {"name": "kubernetes-dashboard"}})
+---
+metadata:
+  annotations:
+    #@ if data.values.ingress.certManagerIssuer:
+    #@overlay/match missing_ok=True
+      cert-manager.io/issuer: #@ data.values.ingress.certManagerIssuer
+    #@ end
